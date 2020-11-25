@@ -243,8 +243,8 @@ body {
                                                         <td class="middle"><?php echo  bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2);  ?> </td>
                                                        <td class="middle">@<?php echo  ($em['gst']/2);  ?>%</td>
                                                         <td class="right"><?php echo bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2);  ?> </td>
-                                                        <td style="text-align: right;"><strong><?php echo bcdiv(((((($em['rate'])*$em['gst'])/100)/2)+(((($em['rate'])*$em['gst'])/100)/2)),1,2);  ?> </strong></td>
-<?php $sno+=  (($em['rate'])*($em['gst']/100));     ?>
+                                                        <td style="text-align: right;"><strong><?php echo ((bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2))*2);  ?> </strong></td>
+<?php $sno+=  ((bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2))*2)     ?>
                                                     </tr>
 
                                        

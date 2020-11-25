@@ -84,15 +84,15 @@
 
 					<span class="icon-bar"></span>
 				</button>
-<a href="<?php echo base_url('invoice')?>"><div class="navbar-header pull-left">
-					<a href="" class="navbar-brand">
+<div class="navbar-header pull-left">
+					<a href="<?php echo base_url('invoice')?>" class="navbar-brand">
 						<small>
 							<img width="10%" height="10%" src="<?php echo base_url(); ?>cosmatics/img/swastik1.jpg">
-							Mangalam Enterprises
+							Mangalam Enterprises.
 						</small>
 					</a>
 				</div>
-</a>
+
 				
 				<?php  
 

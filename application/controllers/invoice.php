@@ -38,6 +38,7 @@ class Invoice extends CI_Controller {
 		//$this->load->library('invoice');
 		//print_r($this->session->userdata('inv_no'));
 		//redirect('products');
+		
 		$prod_data = $this->General_Model->getDataByCond('products',array('active' => '1'));
 		$data['pro'] = count($prod_data);
 

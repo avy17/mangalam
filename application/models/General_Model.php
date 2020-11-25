@@ -23,6 +23,8 @@ class General_Model extends CI_Model {
 
   public function getAllData($table=null)
   {
+    //print_r($this->db->query('SHOW TABLES'));
+
     $query = $this->db->get($table);
     return $query->result_array();
   }
