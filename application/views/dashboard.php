@@ -59,14 +59,11 @@
 											</div>
 
 											<div class="infobox-data">
-												<span class="infobox-data-number">6,251</span>
-												<div class="infobox-content">pageviews</div>
+												<span class="infobox-data-number"><?php echo number_format($gst_total,2) ?></span>
+												<div class="infobox-content">GST this year</div>
 											</div>
 
-											<div class="badge badge-success">
-												7.2%
-												<i class="ace-icon fa fa-arrow-up"></i>
-											</div>
+											
 										</div>
 
 										<div class="infobox infobox-blue2">
@@ -87,40 +84,8 @@
 
 										<div class="space-6"></div>
 
-										<div class="infobox infobox-green infobox-small infobox-dark">
-											<div class="infobox-progress">
-												<div class="easy-pie-chart percentage" data-percent="61" data-size="39">
-													<span class="percent">61</span>%
-												</div>
-											</div>
 
-											<div class="infobox-data">
-												<div class="infobox-content">Task</div>
-												<div class="infobox-content">Completion</div>
-											</div>
-										</div>
 
-										<div class="infobox infobox-blue infobox-small infobox-dark">
-											<div class="infobox-chart">
-												<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-											</div>
-
-											<div class="infobox-data">
-												<div class="infobox-content">Earnings</div>
-												<div class="infobox-content">$32,000</div>
-											</div>
-										</div>
-
-										<div class="infobox infobox-grey infobox-small infobox-dark">
-											<div class="infobox-icon">
-												<i class="ace-icon fa fa-download"></i>
-											</div>
-
-											<div class="infobox-data">
-												<div class="infobox-content">Downloads</div>
-												<div class="infobox-content">1,205</div>
-											</div>
-										</div>
 									</div>
 
 									<div class="vspace-12-sm"></div>

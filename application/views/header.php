@@ -84,8 +84,7 @@
 
 					<span class="icon-bar"></span>
 				</button>
-
-				<div class="navbar-header pull-left">
+<a href="<?php echo base_url('invoice')?>"><div class="navbar-header pull-left">
 					<a href="" class="navbar-brand">
 						<small>
 							<img width="10%" height="10%" src="<?php echo base_url(); ?>cosmatics/img/swastik1.jpg">
@@ -93,7 +92,8 @@
 						</small>
 					</a>
 				</div>
-
+</a>
+				
 				<?php  
 
 				$inv = '#0';

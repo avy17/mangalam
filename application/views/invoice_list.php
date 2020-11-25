@@ -37,6 +37,7 @@
 														<th>Created on</th>
 														<th>No. of products</th>
 														<th>Invoice total</th>
+														<th>Total GST</th>
 														<th>Action</th>
 													</tr>
 												</thead>
@@ -62,6 +63,7 @@
 														<td><?php echo $em['nop']?></td>
 
 														<td class="amount"><?php echo number_format($em['total'],2) ?></td>
+														<td class="amount"><?php echo number_format($em['gst_value'],2) ?></td>
 														
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">

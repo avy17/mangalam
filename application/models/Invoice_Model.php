@@ -89,7 +89,7 @@ class Invoice_Model extends CI_Model {
   public function getAllInvoices(){
 
 
-       $data = $this->db->query("SELECT *,count(ii.product_id) as nop,invoice.id as inv_id FROM `invoice` left join customer on customer.id = invoice.customer_id left join invoice_items as ii on ii.invoice_id = invoice.id WHERE invoice.date >= '2020-04-01'  group by invoice.id order by invoice.invoice_no DESC");
+       $data = $this->db->query("SELECT *,count(ii.product_id) as nop,sum(price*qty*((100-discount)/100)*gst/100) as gst_value,invoice.id as inv_id FROM `invoice` left join customer on customer.id = invoice.customer_id left join invoice_items as ii on ii.invoice_id = invoice.id left join products AS p on p.id=ii.product_id WHERE invoice.date >= '2020-04-01'  group by invoice.id order by invoice.invoice_no DESC");
 
 
    /*SELECT sum(p.rate) as rate,p.gst as gst FROM `invoice` as i left join invoice_items as

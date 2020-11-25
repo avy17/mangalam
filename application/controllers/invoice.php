@@ -50,13 +50,19 @@ class Invoice extends CI_Controller {
 		$date = $year.'-04-01';		
 		$prod_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date ));
 		//_print_r($prod_data);exit();
-		$total=0;
+		$total=$gst_total= 0;
 		foreach ($prod_data as $key => $value) {
 			$total+= $value['total'];			
 		}
 		$data['invoices'] = count($prod_data);
 		$data['total'] = $total;
-		
+
+		$all_inv_data = $this->all_invoices(true);
+
+		foreach ($all_inv_data as $key => $value) {
+			$gst_total += $value['gst_value']; 
+		}
+		$data['gst_total'] = $gst_total;
 		
 		_getAdminLoadView('dashboard',$data);
 
@@ -343,9 +349,14 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 
 	}
 
-	public function all_invoices(){
+	public function all_invoices($call=false){
 
 		$data['prod_data'] = $this->Invoice_Model->getAllInvoices();
+
+		if($call==true){
+			return $data['prod_data'];
+		}
+		//_print_r($data['prod_data']);exit();
 		if($this->session->userdata('inv_id')){
 
 		$data['pro_count'] = $this->Invoice_Model->getInvoiceTotalProducts($this->session->userdata('inv_id'));
