@@ -1,0 +1,175 @@
+LAN Concepts
+________________________________
+
+1. LAN works in Phy & DL layers
+2. DLL is divided into 2 layers: MAC (802.3) and LLC (802.2)
+
+
+IEEE Standards 802
+
+2. std. for DL layer in OSI
+3. std. for MAC layer using CSMA/CD
+4. std. for MAC using token bus
+5. std. for MAC using token ring
+6. std. for MAN
+
+
+
+Token Ring
+______________
+
+An empty packet (token) is circulated among all the devices. Every node waits for its turn
+Data can only be send by the token holder.
+
+======================================================
+
+MAC address stored is stored in Canonical form i.e little endian (LSB)
+
+10 base 2 -> 10 MBps and 2 represents maximum segment length (2*100 m)
+
+
+Application layer protocols
+_________________________________
+
+SMTP: 
+
+It is a push protocol used to send mail.
+SMTP server is always on listening mode for a TCP 
+
+
+DNS
+
+Uses UDP on port 53 to serve queries.
+DNS client -> DNS resolver -> DNS name server (reply back)
+
+
+
+Networking Devices
+_______________________________
+
+Hubs: Hubs are used to connect twisted pair cables nw.Transfers data to every device connected.
+
+Gateways: Are protocol converters. Router is a special type of gateway
+
+Switch: Same as Hub except: it forwards packet to only the destined port and not each port by learning MAC address. It is a data link layer device. It uses packet switching method. Transmission mode is full duplex hence no collision.
+Bridges: Divides a larger nw into two smaller nws by sitting bw them.
+
+Types of Bridges
+____________________
+
+1. Transparent Bridge: Either blocks or fwd data based on MAC.
+2. Source Route Bridge: Used in Token ring nw's. The entire path is stored in packet itself.
+3. Translational Bridge: used to convert one format into another eg from ethernet to token ring
+
+Routers:
+
+Protocols used in dynamic routing:
+
+Distant vector routing
+Linked state routing
+__________________________________
+
+IP Protocol
+
+Connectionless. Transfers datagrams or packets
+Routers uses interior/exterior gateway protocol to help reaching packets.
+
+Interior Gateway Protocol (IGP): Eg: Routing Info. protocol (RIP), OSPF (Open shortest path first)
+
+Exterior Gateway Protocol (EGP): Border Gateway protocol 
+
+#############################################################################
+
+Data warehouse
+_________________
+
+Data extraction - gathering data from multiple sources.
+Data Cleaning - Correcting errors.
+Transformation- Converting from legacy to warehouse format.
+Metadata acts as a directory that helps decision support system.
+
+#############################################################################
+
+JAVA
+__________
+
+Static methods in java dont need obj to be executed. They can be called directly.
+
+Abstract class - Used for abstraction. Abstract class can only be inherited by other class. No obj can be called.
+
+Abstract class can have both abstract as well as regular methods.
+
+Abstract methods can only exists in abstract class and it does not have body. Body is provided by subclass.
+
+Interfaces in Java: (Used to achieve abstraction/ multiple inheritance).
+
+How Interfaces are different than classes?
+
+1. Can't instantiate.
+2. Doesn't contains any constructors
+3. All methods are abstract.
+4. It is implemented by class and not extended.
+5. Interfaces can extends any no. of other interfaces.
+
+
+Encapsulation: Data hiding. For ex: 
+
+public class encapsulation(){
+	private int a;
+	
+	public int geta(){
+		return a;
+	}
+	public int seta(int newVal){
+		a= newVal;
+	}
+
+}
+
+If we dont create set function - var a cannot be modified (read only). Hence data hiding.
+
+Final Keyword in Java
+______________________
+
+. If a var is final in java (and blank also) it can only be initialized via constructor else cannot be modified.
+
+. If a parameter is final - cant change its value
+
+. Eg. PAN card value
+
+########################################################################################
+Data Structures and Algo
+_____________________________
+
+
+Q. How to find MST of a graph?
+ 
+1. Create adjacency matrix.
+2. Replace all diagonal 0's with degree of the vertex.
+3. Replace all non-diagonal 1's with -1.
+4. Calculate a11 cofactor
+
+
+Divide and Conquer
+__________________________
+
+1. Merge Sort -> nlogn
+2. Quick Sort -> n2 , nlogn (best case)
+3. Heap Sort ->  nlogn 
+
+Greedy Approach
+___________________
+
+1. Djkstra -> O(ElogV)   (It uses heapify to extract min) + Relax edge (E times)
+2. Bellman Ford ->  O(VE)      To detect -ve cycles in a graph. 
+3. Floyd Warshalls ->  O(V3)   (All pairs shortest path)
+4. Prims ->  O(ElogV) 
+5. Kruskal -> O(ElogV) or O(ElogE) whichever is max. 
+
+
+
+
+
+
+
+
