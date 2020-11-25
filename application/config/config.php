@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 if($_SERVER['SERVER_NAME']=="localhost")
-    $config['base_url'] = 'http://localhost/ci2/';
+    $config['base_url'] = 'http://localhost/mangalam/';
 	//$config['base_url'] = 'http://103.15.232.35/govindims';
 else
 {
