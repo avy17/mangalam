@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 05:15 PM
+-- Generation Time: Nov 29, 2020 at 08:37 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -1345,6 +1345,20 @@ INSERT INTO `products` (`id`, `name`, `rate`, `unit`, `hsn`, `gst`, `active`) VA
 (587, 'Fruitin''s Rosemery 1kg', 390, 'pcs', '12119094', 5, '1'),
 (588, 'Artificial Wax Shiva', 400, 'pcs', '3404', 18, '1');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_rate_history`
+--
+
+CREATE TABLE `product_rate_history` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `invoice_id` int(11) DEFAULT NULL,
+  `rate` float DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -1377,6 +1391,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product_rate_history`
+--
+ALTER TABLE `product_rate_history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1400,6 +1420,11 @@ ALTER TABLE `invoice_items`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=589;
+--
+-- AUTO_INCREMENT for table `product_rate_history`
+--
+ALTER TABLE `product_rate_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
