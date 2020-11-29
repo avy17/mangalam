@@ -199,8 +199,22 @@ class Products extends CI_Controller {
 							'unit' => $postData[4]);
   		
   		$id = $this->General_Model->updateData('products',$pro_id,$updateData);
+  		$id2 = $this->General_Model->insertDataByTable('product_rate_history',array('product_id' => $pro_id, 'invoice_id' => null, 'rate'=>$postData[1]));
   		echo json_encode($updateData);
 	
+
+	}
+
+	public function history($pro_id,$cust_id=null){
+
+		$this->load->model('Invoice_Model');
+		$data['pro_data'] = $pro_data = $this->Invoice_Model->productRateHistory($pro_id);
+
+		//_print_r($pro_data);exit();
+
+		_getAdminLoadView('product_history',$data);
+
+		
 
 	}
 
@@ -225,6 +239,8 @@ class Products extends CI_Controller {
   		{  		
 
   			$id = $this->General_Model->updateData('products',$pro_id,$postData);
+  			$id2 = $this->General_Model->insertDataByTable('product_rate_history',array('product_id' => $pro_id, 'invoice_id' => null, 'rate'=>$postData['rate']));
+  		
   	
 			redirect('products');
   	}
@@ -257,6 +273,8 @@ class Products extends CI_Controller {
 );
 		$insert_id = $this->Products_Model->insertDataByTable('invoice_items',$data);
 		$this->Products_Model->updateData('products',$dataArr[0],['rate'=>$dataArr[2]]);
+		$this->General_Model->insertDataByTable('product_rate_history',array('product_id' => $dataArr[0], 'invoice_id' => $inv_data[0]['id'], 'rate'=>$dataArr[2]));
+  		
 
 		$this->load->library('invoice');
 		$inv_total = $this->invoice->view_invoice($this->session->userdata('inv_id'));
@@ -268,6 +286,6 @@ class Products extends CI_Controller {
 	}
 
 
-
+//insertDataByTable
 
 }

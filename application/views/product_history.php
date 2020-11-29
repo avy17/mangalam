@@ -8,8 +8,7 @@
 						<div class="page-header">
 							<h1>
 								<i class="menu-icon fa fa-shopping-cart"></i>
-								Products <div style="text-align: right"><a href="<?php echo base_url('products/add') ?>"><button id="" type="button" class="btn btn-white btn-success">Add new</button></a></div>	
-								
+								Product Rate History
 							</h1>
 						</div><!-- /.page-header -->
 
@@ -34,18 +33,18 @@
 																<span class="lbl"></span>
 															</label>
 														</th>
-														<th>Name</th>
-														<th>HSN</th>
+
+														<th>Product Name</th>
 														<th>Rate</th>
-														<th>Unit</th>
-														<th>GST Rate (%)</th>
-														<th>Action</th>
+														<th>Date time</th>
+														<th>Invoice (If any)</th>
+														<th>Customer</th>
 													</tr>
 												</thead>
 
 												<tbody>
 													<?php 
-													foreach((array)$prod_data as $em){
+													foreach((array)$pro_data as $em){
                     ?>
 													<tr id="tr_<?php echo $em['id']?>">
 														<td class="center">
@@ -54,41 +53,13 @@
 																<span class="lbl"></span>
 															</label>
 														</td>
+														<td><?php echo $em['pname']?></td>
+														<td><?php echo number_format($em['hrate'],2)?></td>
+														<td><?php echo date_converter($em['time'])?></td>
+														<td><?php echo $em['invoice_no']?></td>
+														<td><?php echo $em['cname']?></td>
 
-														<td id="td_name_<?php echo $em['id']?>"><?php echo $em['name']?></td>
-														<td id="td_hsn_<?php echo $em['id']?>"><?php echo $em['hsn']?></td>
-														<td class="amount" id="td_rate_<?php echo $em['id']?>"><?php echo number_format($em['rate'],2)?></td>
-														<td id="td_unit_<?php echo $em['id']?>"><?php echo $em['unit']?></td>
-														<td id="td_gst_<?php echo $em['id']?>"><?php echo $em['gst'].'%'?></td>
 														
-														<td>
-															<div class="hidden-sm hidden-xs action-buttons">
-
-																<a class="" href="<?php echo base_url('products/history/').$em['id'] ?>" data-target="" > 
-																	<i class="ace-icon fa fa-search plus"></i>
-																</a>
-																
-																<a class="edit_pro" href="#edit-pro-modal" data-target="#edit-pro-modal" data-id ="<?php echo $em['id'].'#'.$em['name'].'#'.$em['rate'].'#'.$em['hsn'].'#'.$em['gst'].'#'.$em['unit']?>" data-toggle="modal"> 
-																	<i class="ace-icon fa fa-pencil bigger-130"></i>
-																</a>
-
-
-
-																<a class="" href="<?php echo base_url('products/delete/').$em['id'] ?>" data-target="" > 
-																	<i class="ace-icon fa fa-trash"></i>
-																</a>
-<?php if($this->session->userdata('inv_no')) { ?>
-				<a class="qty_add" href="#modal-form" data-target="#modal-form" data-id ="<?php echo $em['id'].'#'.$em['name'].'#'.$em['rate'].'#'.$em['hsn'].'#'.$em['gst'].'#'.$em['unit']?>" role="button" class="blue" data-toggle="modal"> <span class="glyphicon glyphicon-shopping-cart"></span> #<?php print_r($this->session->userdata('inv_no'))?></a>	
-				<?php } ?>		
-
-												
-										
-															
-																				
-																
-															</div>
-
-														</td>
 													</tr>
 
 										

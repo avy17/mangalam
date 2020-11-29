@@ -57,7 +57,7 @@
 
 														
 														<td><?php echo $em['invoice_no']?></td>
-														<td><?php echo $em['name']?> </td>
+														<td><?php echo $em['cname']?> </td>
 														
 														<td><?php echo date('d-m-Y',strtotime($em['date']))?></td>
 														<td><?php echo $em['nop']?></td>

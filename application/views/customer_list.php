@@ -42,11 +42,10 @@
 														</th>
 														
 														<th>Name</th>
-														<th>Address</th>
-														<th>Pin</th>
+																									
 
 														<th>GST No.</th>
-														<th>Contact</th>
+														<th>Payment Due<br><em>Since (<?php echo $dt?>)<em></th>
 
 														<th>Action</th>
 													</tr>
@@ -67,10 +66,10 @@
 
 														
 														<td><?php echo $em['name']?></td>
-														<td><?php echo $em['address']?></td>
-														<td><?php echo $em['pincode']?></td>
+													
+														
 														<td><?php echo $em['gst_no']?></td>
-														<td><?php echo $em['contact']?></td>
+														<td class="amount"><?php echo number_format($em['payment'],2)?></td>
 
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
@@ -83,7 +82,7 @@
 
 															
 
-									
+								<a class=""  href="<?php echo base_url('customer/getCustomerDetails/').$em['id'] ?>" role="button" class="blue" >His invoices</a>	
 										
 																				
 																

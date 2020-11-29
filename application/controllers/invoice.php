@@ -88,6 +88,8 @@ class Invoice extends CI_Controller {
 				$net = $eff_price*((100-($iiid_data['discount']))/100);
 
   		$this->General_Model->updateData('invoice',$inv_id,array('total'=>$total));
+		$this->General_Model->insertDataByTable('product_rate_history',array('product_id' => $iiid_data['product_id'], 'invoice_id' => $inv_id, 'rate'=>$price));
+  		
   		$resultArr = array('total'=>number_format($total,2),'net'=>number_format($net,2));
   		
   		echo json_encode($resultArr);	
@@ -357,7 +359,9 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 		if($call==true){
 			return $data['prod_data'];
 		}
-		//_print_r($data['prod_data']);exit();
+		$data['sundry_data'] = $this->Invoice_Model->getSundryDebtors('2020-04-01');
+		
+		//_print_r($data['sundry_data']);exit();
 		if($this->session->userdata('inv_id')){
 
 		$data['pro_count'] = $this->Invoice_Model->getInvoiceTotalProducts($this->session->userdata('inv_id'));

@@ -18,7 +18,6 @@ class Invoice_Model extends CI_Model {
 
     $current_year = date('Y-04-01');
 
-
    $inv_no = $this->db->select_max('invoice_no')->where('date >= ',$current_year)->get($this->table)->row();
 
    //$inv_n = $this->db->where('date >= ',$current_year)->get($this->table);
@@ -27,6 +26,32 @@ class Invoice_Model extends CI_Model {
    //echo $this->db->last_query();exit;
    $max_id = $inv_no->invoice_no;
    return ($max_id+1);
+
+  }
+
+  public function productRateHistory($pro_id){
+
+    //SELECT * FROM `product_rate_history`
+
+    //$this->db->select('*');
+    //$this->db->from('product_rate_history');
+
+    //$this->db->select('prh.*,products.name,i.invoice_no,c.name as cname');
+    $this->db->select('*,c.name as cname,prh.created_at as time,prh.rate as hrate, products.name as pname');
+    $this->db->from('product_rate_history as prh');
+    $this->db->join('products', 'prh.product_id = products.id','left');
+    $this->db->join('invoice as i', 'i.id = prh.invoice_id','left');
+    $this->db->join('customer as c', 'i.customer_id = c.id','left');
+    
+    $this->db->where(array('products.id' => $pro_id));
+
+
+    $query = $this->db->get();
+
+    return ($query->result_array());
+
+// Produces:
+// SELECT * FROM blogs JOIN comments ON comments.id = blogs.id
 
   }
 
@@ -85,11 +110,47 @@ class Invoice_Model extends CI_Model {
     return 1;
   }
 
+  public function getSundryDebtors($date1=null, $date2=null){
+   
+    $q = "SELECT c.*,i.id as iid,sum(i.total) as payment from invoice as i left join customer as c on i.customer_id = c.id  ";
+
+    if($date2 == null){
+      $date2 = date('Y-m-d');
+    }
+
+    $date1 = financial_yr_start();
+
+    $q .= " where i.created_at >= '".$date1."'"; //$q .= " and i.created_at <= '".$date2."'";
+    
+    $q .= " GROUP by c.id ";
+
+    $q .=" order by c.name ASC";
+
+    $data = $this->db->query($q);
+    return ($data->result_array());
+  }
+
+  public function getAllInvoicesOfCustomer($cust_id=0){
+
+    $q = "SELECT c.id,i.*,i.id as iid,c.name,c.gst_no FROM `invoice` as i left join customer as c on c.id=i.`customer_id` where total is not null and c.id =".$cust_id;
+
+    $date1 = financial_yr_start();
+    $date2 = date('Y-m-d');
+    $q .= " and i.created_at >= '".$date1."'";
+
+     $q .=" order by i.invoice_no DESC";
+
+    $data = $this->db->query($q);
+    return ($data->result_array());
+  }
+
+  
+
 
   public function getAllInvoices(){
 
 
-       $data = $this->db->query("SELECT *,count(ii.product_id) as nop,sum(price*qty*((100-discount)/100)*gst/100) as gst_value,invoice.id as inv_id FROM `invoice` left join customer on customer.id = invoice.customer_id left join invoice_items as ii on ii.invoice_id = invoice.id left join products AS p on p.id=ii.product_id WHERE invoice.date >= '2020-04-01'  group by invoice.id order by invoice.invoice_no DESC");
+       $data = $this->db->query("SELECT *,count(ii.product_id)as nop, customer.name as cname ,sum(price*qty*((100-discount)/100)*gst/100) as gst_value,invoice.id as inv_id FROM `invoice` left join customer on customer.id = invoice.customer_id left join invoice_items as ii on ii.invoice_id = invoice.id left join products AS p on p.id=ii.product_id WHERE invoice.date >= '2020-04-01'  group by invoice.id order by invoice.invoice_no DESC");
 
 
    /*SELECT sum(p.rate) as rate,p.gst as gst FROM `invoice` as i left join invoice_items as

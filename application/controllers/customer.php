@@ -79,18 +79,22 @@ state: "Uttar Pradesh"
 
 	public function show()
 	{
-		$this->load->model('General_Model');
-		$data['prod_data'] = $this->General_Model->getAllData('customer');
-		//$this->load->view('header');
+		$this->load->model('Invoice_Model');
+		$year = date('Y');
+		$dt = $year.'-04-01';
+		$data['prod_data'] = $this->Invoice_Model->getSundryDebtors();
+		//_print_r($data['prod_data']);exit();
+		$data['dt'] = date('d-M-Y',strtotime($dt));
 		_getAdminLoadView('customer_list',$data);
 
 	}
 
 	public function getCustomerDetails($id){
 
-		$this->load->model('General_Model');
-		$inv_data = $this->General_Model->getDataByid('customer',$id);
-		echo json_encode($inv_data);
+		$this->load->model('Invoice_Model');
+		$data['inv_data'] = $this->Invoice_Model->getAllInvoicesOfCustomer($id);
+		//_print_r($data['inv_data']);exit();
+		_getAdminLoadView('invoice_of_customer',$data);
 
 	}
 

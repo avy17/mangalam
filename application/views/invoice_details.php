@@ -269,7 +269,7 @@ body {
 
                     <tr>
                         <td  colspan='7' style="text-align:right; padding-right:0px;color:#0931f3;">
-                <?php echo "Total Tax Amount (B):" ?>
+                <?php echo "Tax Amount (B):" ?>
 
                         </td>
 
@@ -280,7 +280,7 @@ body {
 
                                                 <tr>
                         <td  colspan='7' style="text-align:right; padding-right:0px;color:#0931f3;">
-                <?php echo "Grand Total (A+B):" ?>
+                <?php echo "Sub total (A+B):" ?>
 
                         </td>
 
@@ -347,10 +347,10 @@ body {
 
                         </td>
                        
-                        <td  colspan='3' style="text-align:right; padding-right:0px;font-size:small;font-weight: 600;">
+                        <td  colspan='3' style="text-align:right; padding-right:0px;font-size:large;font-weight: 600;">
 
             <input type="hidden" id="amount" value="<?php echo round($gross_amt+$sno); ?>">       
-        <span id=""><?php echo  "Total Amount (INR):"?></span>      
+        <span id=""><?php echo  "Grand Total (₹):"?></span>      
 
                         </td>
                          <td  colspan='1' style="text-align:right; padding-right:0px;font-size:large;">

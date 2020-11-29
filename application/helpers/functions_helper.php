@@ -16,6 +16,17 @@ function _nocache(){
  * @Method name: _print_r
  */
 
+function date_converter($dt=null) {
+          
+          return date('d-M-Y',strtotime($dt));
+}
+
+function financial_yr_start(){
+
+  $yr = date('Y');
+  return $yr.'-04-01';
+}
+
 function _print_r($array) {
           echo '<pre>';
           print_r($array);
