@@ -166,6 +166,7 @@ class Products extends CI_Controller {
 	{
 		$this->load->model('Products_Model');
 		$data['prod_data'] = $this->Products_Model->getAllProducts();
+		//$this->output->cache(10);
 
 			//$this->load->view('header');
 		_getAdminLoadView('products',$data);

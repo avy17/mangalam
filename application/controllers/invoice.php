@@ -295,9 +295,26 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 
 			$prod_data =  $this->Invoice_Model->updateData($inv_id,array('total' => $final));
 
-			$this->config->set_item('item_name', 'item_value');			
+			$this->config->set_item('item_name', 'item_value');	
+			//_print_r(($data['prod_data']));exit;
 
-			$html = $this->load->view('invoice_details',$data,true);
+			$cnt = count(($data['prod_data']));
+			// $n=13;
+			// $loop = ceil($cnt%13);
+			// echo $loop;exit;
+			$html = $this->load->view('inv_header',$data,true);
+
+					// for ($i=0; $i <=$cnt ; $i+=$n) { 
+
+
+
+						
+					// }
+			$html .= $this->load->view('invoice_details',$data,true);
+						
+
+
+						$html .= $this->load->view('inv_footer',$data,true);
 
 			echo $html; 
 
@@ -350,6 +367,12 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 		redirect('invoice/all_invoices');
 
 
+	}
+
+	public function lock_invoice_item($flag=1,$id){
+
+	$this->General_Model->updateData('invoice',$id,array('locked' => $flag));
+	redirect('invoice/all_invoices');
 	}
 
 	public function all_invoices($call=false){
@@ -489,19 +512,6 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
   		}
   	}
 		_getAdminLoadView('change_party',$data);
-
-
-
-
-
-
-
-
-
-
-
-		
-
 	}
 
 	public function _valid_invoice_number(){

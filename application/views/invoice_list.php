@@ -70,16 +70,24 @@
 																<a class="blue" href="<?php echo base_url('invoice/view_invoice/').$em['inv_id']?>">
 																	<i class="ace-icon fa fa-search-plus bigger-130"></i>
 																</a>
+																<?php if($em['locked']==0){ ?>
 
 																
-												<a  target="_blank" class="" href="<?php echo base_url('invoice/view_invoice/').$em['inv_id'].'/1';?>">
-																	<i class="fa fa-truck" aria-hidden="true"></i>
-																</a>
-
-																<a class="blue" href="<?php echo base_url('invoice/view_invoice_item/').$em['inv_id']?>">
+																											<a class="blue" href="<?php echo base_url('invoice/view_invoice_item/').$em['inv_id']?>">
 																	<i class="ace-icon fa fa-pencil bigger-130"></i>
 																</a>
 
+													<a class="blue" href="<?php echo base_url('invoice/lock_invoice_item/1/').$em['inv_id']?>">
+																	<i class="ace-icon fa fa-lock bigger-130"></i>
+																</a>
+
+<?php } else{ ?>
+
+<a class="blue" href="<?php echo base_url('invoice/lock_invoice_item/0/').$em['inv_id']?>">
+																	<i class="ace-icon fa fa-unlock bigger-130"></i>
+																</a>
+
+																<?php }  ?>
 
 																
 
