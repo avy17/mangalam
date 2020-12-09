@@ -44,6 +44,7 @@
 												<thead>
 													<tr>
 														
+														<th>SNo.</th>
 														<th>Product Name</th>
 														<th>HSN/SAC</th>
 														<th>GST Rate (%)</th>
@@ -57,12 +58,13 @@
 
 												<tbody>
 													<?php 
+													$sn = 1;
 													foreach((array)$prod_data as $em){
                     ?>
 													<tr>
 
 														
-														
+														<td><?php echo $sn ?></td>
 														<td><?php echo $em['product_name']?></td>
 														<td><?php echo $em['hsn']?></td>
 														<td><?php echo $em['gst'].'%'?></td>
@@ -92,7 +94,7 @@
 
 										
 													
-												<?php } ?>
+												<?php $sn++; } ?>
 												</tbody>
 												</table>
 											</div>

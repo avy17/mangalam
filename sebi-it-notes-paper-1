@@ -6,14 +6,13 @@ ________________________________
 
 
 IEEE Standards 802
+__________________________________
 
-2. std. for DL layer in OSI
-3. std. for MAC layer using CSMA/CD
-4. std. for MAC using token bus
-5. std. for MAC using token ring
-6. std. for MAN
-
-
+802.2 std. for DL layer in OSI
+802.3 std. for MAC layer using CSMA/CD
+802.4 std. for MAC using token bus
+802.5 std. for MAC using token ring
+802.6 std. for MAN
 
 Token Ring
 ______________
@@ -62,12 +61,25 @@ ____________________
 3. Translational Bridge: used to convert one format into another eg from ethernet to token ring
 
 Routers:
-
-Protocols used in dynamic routing:
-
-Distant vector routing
-Linked state routing
+Protocols used in dynamic routing: Distant vector routing & Linked state routing
 __________________________________
+
+TCP
+___________
+
+Connection: 3 way handshake
+
+1st (client to server): SYN & SEQ(client)
+2nd (server to client): SYN-ACK & SEQ(client)+1 & SEQ(server)
+3rd (client to server): ACK & SEQ(client)+1 & SEQ(server)+1
+
+Termination
+
+1st (client to server): FIN & SEQ(client)
+2nd (server to client): ACK & FIN & SEQ(client)+1 & SEQ(server)
+3rd (client to server): ACK & SEQ(server)+1
+
+####################################################################
 
 IP Protocol
 
@@ -99,9 +111,9 @@ Abstract class - Used for abstraction. Abstract class can only be inherited by o
 
 Abstract class can have both abstract as well as regular methods.
 
-Abstract methods can only exists in abstract class and it does not have body. Body is provided by subclass.
+Abstract methods can only exists in abstract class and it does not have body. Body is provided by subclass. 
 
-Interfaces in Java: (Used to achieve abstraction/ multiple inheritance).
+Interfaces in Java: (Used to achieve abstraction/ multiple inheritance). It is a type of abstract class.
 
 How Interfaces are different than classes?
 
@@ -110,6 +122,8 @@ How Interfaces are different than classes?
 3. All methods are abstract.
 4. It is implemented by class and not extended.
 5. Interfaces can extends any no. of other interfaces.
+
+Use of interfaces - Use to group abstract methods and achieving multiple inheritance.
 
 
 Encapsulation: Data hiding. For ex: 
@@ -140,15 +154,12 @@ ______________________
 ########################################################################################
 Data Structures and Algo
 _____________________________
-
-
 Q. How to find MST of a graph?
  
 1. Create adjacency matrix.
 2. Replace all diagonal 0's with degree of the vertex.
 3. Replace all non-diagonal 1's with -1.
 4. Calculate a11 cofactor
-
 
 Divide and Conquer
 __________________________
