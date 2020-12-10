@@ -122,7 +122,7 @@ class Products extends CI_Controller {
 	public function get_price(){
 
 		$this->load->model('Products_Model');
-
+		$this->load->model('General_Model');
 /* 		Array
 (
     [0] => 214
@@ -136,11 +136,15 @@ class Products extends CI_Controller {
 		$ajaxData = $this->input->post('info');
 		//_print_r($ajaxData);exit();
 		$pro_id = $ajaxData[0];
-		
-
+		$txt = ' ';
 		$last_data =  $this->Products_Model->getLastRate($pro_id);
-
-
+		$pro_history = $this->General_Model->getDataByCond('product_rate_history',array('product_id' => $pro_id));
+		 if(count($pro_history)>0){
+			foreach ($pro_history as $key => $value) {
+		 		$txt .= $value['rate'].', ';	
+		 	}
+		 }
+		$ajaxData[8] = $txt;
 		if(count($last_data)>0){	
 
 			$ajaxData[2] = $last_data['price'];
@@ -151,7 +155,6 @@ class Products extends CI_Controller {
 
 			$ajaxData[6] = '1'; // quantity
 			$ajaxData[7] = '0'; // discount
-
 		}
 
 		//_print_r($last_data);exit();
@@ -166,8 +169,7 @@ class Products extends CI_Controller {
 	{
 		$this->load->model('Products_Model');
 		$data['prod_data'] = $this->Products_Model->getAllProducts();
-		//$this->output->cache(10);
-
+		//$this->output->cache(1);
 			//$this->load->view('header');
 		_getAdminLoadView('products',$data);
 

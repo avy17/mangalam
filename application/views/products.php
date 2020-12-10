@@ -71,9 +71,6 @@
 																<a class="edit_pro" href="#edit-pro-modal" data-target="#edit-pro-modal" data-id ="<?php echo $em['id'].'#'.$em['name'].'#'.$em['rate'].'#'.$em['hsn'].'#'.$em['gst'].'#'.$em['unit']?>" data-toggle="modal"> 
 																	<i class="ace-icon fa fa-pencil bigger-130"></i>
 																</a>
-
-
-
 																<a class="" href="<?php echo base_url('products/delete/').$em['id'] ?>" data-target="" > 
 																	<i class="ace-icon fa fa-trash"></i>
 																</a>
@@ -152,7 +149,8 @@
 
 															<div>
 																<input type="number" id="price"  placeholder="" value="1" />
-																<span id="per"><em></em></span>
+																<span id="per"><em></em></span><br>
+																Previous Rates: <span id="rate_hist"><em></em></span>
 															</div>
 
 														</div>

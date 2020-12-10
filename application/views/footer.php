@@ -646,6 +646,7 @@ $('.qty_add').click(function(){
 						$("#price").val(data[2]);
 						$("#qty").val(data[6]);
 						$("#per").html('per '+data[5]);
+						$("#rate_hist").html(''+data[8]);
 						$("#discount").val(data[7]);
 						$("#head_span").html(data[1]+' ('+data[4]+'% GST)');					
 	

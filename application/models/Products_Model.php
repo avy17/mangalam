@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -40,7 +41,7 @@ return $query->result_array();
 
   public function getAllProducts()
   {
-    $query = $this->db->get_where($this->table,array('active'=>'1'));
+    $query = $this->db->order_by('name','asc')->get_where($this->table,array('active'=>'1'));
     return $query->result_array();
   }
 

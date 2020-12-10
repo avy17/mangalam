@@ -17,9 +17,7 @@ class General_Model extends CI_Model {
     //echo $id;print_r($dataArr);exit;
     $this->db->where('id',$id)->update($table,$dataArr);
     return 1;
-  }
-  
- 
+  } 
 
   public function getAllData($table=null)
   {
@@ -69,12 +67,6 @@ class General_Model extends CI_Model {
     $query = $this->db->get_where($table,array('id'=>$id));
     return $query->row_array();
   }
-
-
-  
-
-
-
   public function uniqueUser($email)
   {
     $this->db->where('email', $email);    

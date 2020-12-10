@@ -90,7 +90,7 @@
 
 									<div class="vspace-12-sm"></div>
 
-									<div class="col-sm-5">
+									<!-- <div class="col-sm-5">
 										<div class="widget-box">
 											<div class="widget-header widget-header-flat widget-header-small">
 												<h5 class="widget-title">
@@ -172,5 +172,5 @@
 												</div><!-- /.widget-main -->
 											</div><!-- /.widget-body -->
 										</div><!-- /.widget-box -->
-									</div><!-- /.col -->
+									</div><!-- /.col --> -->
 								</div><!-- /.row -->
