@@ -132,7 +132,7 @@ class Invoice_Model extends CI_Model {
 
   public function getAllInvoicesOfCustomer($cust_id=0){
 
-    $q = "SELECT c.id,i.*,i.id as iid,c.name,c.gst_no FROM `invoice` as i left join customer as c on c.id=i.`customer_id` where total is not null and c.id =".$cust_id;
+    $q = "SELECT c.id,i.*,i.id as iid,i.date as idate,c.name,c.gst_no FROM `invoice` as i left join customer as c on c.id=i.`customer_id` where total is not null and c.id =".$cust_id;
 
     $date1 = financial_yr_start();
     $date2 = date('Y-m-d');

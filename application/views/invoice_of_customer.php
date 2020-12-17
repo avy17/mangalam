@@ -65,7 +65,7 @@
 														<td style"font-size:26px"><a href="<?php echo base_url('invoice/view_invoice/').$em['iid']?>"><?php echo $em['invoice_no']?></a>   </td>
 													
 														
-														<td><?php echo date_converter($em['created_at']); ?></td>
+														<td><?php echo date_converter($em['idate']); ?></td>
 														<td class="amount"><?php echo number_format($em['total'],2)?></td>
 
 														<td>
