@@ -38,6 +38,8 @@ class Invoice extends CI_Controller {
 		//$this->load->library('invoice');
 		//print_r($this->session->userdata('inv_no'));
 		//redirect('products');
+		$a_date = date('Y-m-d');
+		$last_day = date("t", strtotime($a_date));
 		
 		$prod_data = $this->General_Model->getDataByCond('products',array('active' => '1'));
 		$data['pro'] = count($prod_data);
@@ -48,15 +50,33 @@ class Invoice extends CI_Controller {
 		$prod_data = $this->General_Model->getAllData('customer');
 		$data['customer'] = count($prod_data);
 		$year = date('Y');
+		$month = date('m');
 		$date = $year.'-04-01';		
 		$prod_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date ));
 		//_print_r($prod_data);exit();
-		$total=$gst_total= 0;
+		$total=$gst_total=$this_month_total= 0;
 		foreach ($prod_data as $key => $value) {
 			$total+= $value['total'];			
 		}
+
+		foreach ($prod_data as $key => $value) {
+			$inv_date = date('Y-m-d',strtotime($value['created_at']));
+
+			$date1 = $year.'-'.$month.'-01';
+			$date2 = $year.'-'.$month.'-'.$last_day;
+
+			if(strtotime($inv_date) >= strtotime($date1) && strtotime($inv_date) <= strtotime($date2)){
+				$this_month_total += $value['total']; 
+			}
+
+		}
+
 		$data['invoices'] = count($prod_data);
 		$data['total'] = $total;
+		$data['this_month_total'] = $this_month_total;
+
+		//_print_r($data);exit();
+		
 
 		$all_inv_data = $this->all_invoices(true);
 
@@ -94,6 +114,42 @@ class Invoice extends CI_Controller {
   		
   		echo json_encode($resultArr);	
   		
+	}
+
+
+	public function monthly_sales($month=null){
+
+
+		$year = date('Y');
+		if(!$month){
+			$month = date('m');
+		
+		}
+
+		$a_date = date('Y-m-d');
+		$last_day = date("t", strtotime($a_date));
+		$date = $year.'-04-01';	
+		$end_date = ($year+1).'-03-31';	
+		$prod_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date, 'created_at =<' => $end_date));
+		//_print_r($prod_data);exit();
+		$total=$this_month_total= 0;
+		
+
+		foreach ($prod_data as $key => $value) {
+			$inv_date = date('Y-m-d',strtotime($value['created_at']));
+
+			$date1 = $year.'-'.$month.'-01';
+			$date2 = $year.'-'.$month.'-'.$last_day;
+
+			if(strtotime($inv_date) >= strtotime($date1) && strtotime($inv_date) <= strtotime($date2)){
+				$this_month_total += $value['total']; 
+			}
+
+		}
+
+		return $this_month_total;
+
+
 	}
 
 	public function edit_item($id=null,$ajax=false){
@@ -236,6 +292,8 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 		if($inv_id > 0){
 
 			$prod_data =  $this->Invoice_Model->getInvoiceData($inv_id);
+
+			//_print_r($prod_data);exit();
 			$gst_data =  $this->Invoice_Model->getGstData($inv_id);
 			$data['inv_id'] = $inv_id;
 
@@ -292,6 +350,14 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 			$data['v'] = "Original for buyer";
 
 			$data['amount_in_words'] = convert_number_to_words($final).' only';
+			
+			$myvalue = $prod_data[0]['customer_name'];
+
+			$arr = explode(' ',trim($myvalue));
+			$key = count($arr);
+			$name = $arr[0]; 
+
+			$text = "Invoice#".$prod_data[0]['invoice_no'].'-'.$name.'-'.$final;
 
 			$prod_data =  $this->Invoice_Model->updateData($inv_id,array('total' => $final));
 
@@ -302,6 +368,7 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 			// $n=13;
 			// $loop = ceil($cnt%13);
 			// echo $loop;exit;
+			$data['text'] = $text;
 			$html = $this->load->view('inv_header',$data,true);
 
 					// for ($i=0; $i <=$cnt ; $i+=$n) { 

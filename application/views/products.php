@@ -144,13 +144,24 @@
 															</div>
 														</div>
 
+
+														<div class="form-group">
+															<label for="form-field-username">Net Price (Including <span class="gst"></span> GST)</label>
+
+															<div>
+																<input type="number" id="net_price"  placeholder="OPTIONAL" value="" />
+																</div>
+
+														</div>
+
 														<div class="form-group">
 															<label for="form-field-username">Price</label>
 
 															<div>
 																<input type="number" id="price"  placeholder="" value="1" />
 																<span id="per"><em></em></span><br>
-																Previous Rates: <span id="rate_hist"><em></em></span>
+
+																Previous Rates: <span class="text-danger" id="rate_hist"></span>
 															</div>
 
 														</div>
@@ -160,6 +171,7 @@
 
 															<div>
 																<input type="number" id="discount"  placeholder="" value="0" />
+																<input type="hidden" id="gst_val"  placeholder=""  />
 															</div>
 														</div>
 

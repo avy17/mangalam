@@ -139,11 +139,18 @@ class Products extends CI_Controller {
 		$txt = ' ';
 		$last_data =  $this->Products_Model->getLastRate($pro_id);
 		$pro_history = $this->General_Model->getDataByCond('product_rate_history',array('product_id' => $pro_id));
+		$tempArr = array();
 		 if(count($pro_history)>0){
+
+		 	//$pro_history = array_unique($pro_history);
+
 			foreach ($pro_history as $key => $value) {
-		 		$txt .= $value['rate'].', ';	
+				array_push($tempArr, $value['rate']);
+		 	
 		 	}
 		 }
+		 $tempArr = array_unique($tempArr);
+		 $txt = implode(', ',$tempArr);
 		$ajaxData[8] = $txt;
 		if(count($last_data)>0){	
 

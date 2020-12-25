@@ -83,7 +83,7 @@
 
 										
 													
-												<?php $sum+= $em['total']; }  echo 'SUM = '.number_format($sum); ?>
+												<?php $sum+= $em['total']; }  echo '<strong> SUM = '.number_format($sum).'</strong>'; ?>
 												</tbody>
 												</table>
 											</div>

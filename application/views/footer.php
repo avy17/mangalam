@@ -622,6 +622,7 @@ $("#pro_add_reset").click(function() {
 
 $('.qty_add').click(function(){
 						$('#save_btn').prop('disabled',false);
+						$('#net_price').val(0);
 						var name = 	$(this).attr('data-id').split("#");
 
 						<?php  if(!$this->session->userdata('inv_no') || !$this->session->userdata('inv_id')){ ?>
@@ -648,7 +649,10 @@ $('.qty_add').click(function(){
 						$("#per").html('per '+data[5]);
 						$("#rate_hist").html(''+data[8]);
 						$("#discount").val(data[7]);
-						$("#head_span").html(data[1]+' ('+data[4]+'% GST)');					
+						$("#head_span").html(data[1]+' ('+data[4]+'% GST)');	
+						$("#gst_val").val(data[4]);
+						$(".gst").html(data[4]+'%');	
+
 	
 
 					}
@@ -720,6 +724,28 @@ $('.up').on('blur',function(){
 	}
 	
 	
+
+});
+
+
+
+function getPricefromNetPrice(p,gst){	
+
+	var t = (1+(gst/100));
+	return (p/t);
+
+}
+
+$('#net_price').on('keyup',function(){
+
+	var gst = $('#gst_val').val();
+	var p = $('#net_price').val();
+	if(isNaN(gst) || isNaN(p)){
+		alert('Something went wrong');
+	}
+	
+	$('#price').val(getPricefromNetPrice(p,gst));
+
 
 });
 

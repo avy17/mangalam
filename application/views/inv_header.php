@@ -77,6 +77,8 @@ body {
 
 </style>
 
+<title><?php echo $text?></title>
+
 <div id="full-page">
 
 

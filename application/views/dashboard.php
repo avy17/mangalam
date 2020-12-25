@@ -40,6 +40,7 @@
 											</div>
 											
 										</div></a>
+
 										<a href="<?php echo base_url('invoice')?>">
 										<div class="infobox infobox-red">
 											<div class="infobox-icon">
@@ -49,6 +50,18 @@
 											<div class="infobox-data">
 												<span class="infobox-data-number"><?php echo number_format($total,2)?></span>
 												<div class="infobox-content">Sales this year</div>
+											</div>
+										</div></a>
+
+										<a href="">
+										<div class="infobox infobox-red">
+											<div class="infobox-icon">
+												<i class="ace-icon fa fa-usd"></i>
+											</div>
+
+											<div class="infobox-data">
+												<span class="infobox-data-number"><?php echo number_format($this_month_total,2)?></span>
+												<div class="infobox-content">Sales in <?php echo date('M')?></div>
 											</div>
 										</div></a>
 										
