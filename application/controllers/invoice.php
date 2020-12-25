@@ -119,35 +119,49 @@ class Invoice extends CI_Controller {
 
 	public function monthly_sales($month=null){
 
-
 		$year = date('Y');
-		if(!$month){
-			$month = date('m');
-		
-		}
-
 		$a_date = date('Y-m-d');
 		$last_day = date("t", strtotime($a_date));
 		$date = $year.'-04-01';	
 		$end_date = ($year+1).'-03-31';	
-		$prod_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date, 'created_at =<' => $end_date));
-		//_print_r($prod_data);exit();
-		$total=$this_month_total= 0;
+
+		//SELECT *,month(created_at) as mnth ,sum(total) as mt FROM `invoice` 
+		//where year(created_at) = '2020' group by month(created_at) order by id desc
+
+		//$month_wise_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date, 'created_at =<' => $end_date));
+
+		$data['mdata'] = $this->Invoice_Model->getMonthlyData($date,$end_date);
+		//_print_r($data['mdata']);exit();
+		$data['monthArr'] = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+		_getAdminLoadView('monthly_sales',$data);
+
 		
 
-		foreach ($prod_data as $key => $value) {
-			$inv_date = date('Y-m-d',strtotime($value['created_at']));
+		
+		// if(!$month){
+		// 	$month = date('m');
+		
+		// }
 
-			$date1 = $year.'-'.$month.'-01';
-			$date2 = $year.'-'.$month.'-'.$last_day;
+		
+		// $prod_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date, 'created_at =<' => $end_date));
+		// //_print_r($prod_data);exit();
+		// $total=$this_month_total= 0;
+		
 
-			if(strtotime($inv_date) >= strtotime($date1) && strtotime($inv_date) <= strtotime($date2)){
-				$this_month_total += $value['total']; 
-			}
+		// foreach ($prod_data as $key => $value) {
+		// 	$inv_date = date('Y-m-d',strtotime($value['created_at']));
 
-		}
+		// 	$date1 = $year.'-'.$month.'-01';
+		// 	$date2 = $year.'-'.$month.'-'.$last_day;
 
-		return $this_month_total;
+		// 	if(strtotime($inv_date) >= strtotime($date1) && strtotime($inv_date) <= strtotime($date2)){
+		// 		$this_month_total += $value['total']; 
+		// 	}
+
+		// }
+
+		
 
 
 	}

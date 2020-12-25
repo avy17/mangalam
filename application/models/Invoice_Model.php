@@ -56,6 +56,24 @@ class Invoice_Model extends CI_Model {
   }
 
 
+  //SELECT *,month(created_at) as mnth ,sum(total) as mt FROM `invoice` 
+    //where year(created_at) = '2020' group by month(created_at) order by id desc
+
+public function getMonthlyData($start,$end){
+$this->db->select('*,month(created_at) as mnth ,sum(total) as mt')
+      ->from($this->table)
+      ->where(array('created_at >= ' => $start, 'created_at <= ' => $end))
+      ->group_by('month(created_at)')
+      ->order_by('id','desc');
+
+        $query = $this->db->get();
+
+    return ($query->result_array()); 
+
+
+}
+
+
   public function getInvoiceTotalProducts($no){
 
       $data = $this->getInvoiceData($no);

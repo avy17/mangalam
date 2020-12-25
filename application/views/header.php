@@ -292,6 +292,15 @@
 						<b class="arrow"></b>
 					</li>
 
+						<li class="">
+						<a href="<?php echo base_url('invoice/monthly_sales')?>">
+							<i class="menu-icon fa fa-usd"></i>
+							<span class="menu-text">Monthly Sales </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
 
 
 

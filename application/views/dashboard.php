@@ -41,7 +41,7 @@
 											
 										</div></a>
 
-										<a href="<?php echo base_url('invoice')?>">
+										<a href="<?php echo base_url('invoice/monthly_sales')?>">
 										<div class="infobox infobox-red">
 											<div class="infobox-icon">
 												<i class="ace-icon fa fa-usd"></i>
