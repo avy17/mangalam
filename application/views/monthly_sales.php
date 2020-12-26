@@ -41,8 +41,7 @@
                     ?>
 													
 
-														<td id="td_name_<?php echo $em['id']?>"><?php $m= $em['mnth']; echo $monthArr[$m-1]?></td>
-														
+														<td id="td_name_<?php echo $em['id']?>"><a href="<?php echo base_url('invoice/monthly_sales/').$em['mnth'] ?>"><?php $m= $em['mnth']; echo $monthArr[$m-1]?></a></td>
 														<td class="amount" id="td_rate_<?php echo $em['id']?>"><strong><?php echo number_format($em['mt'],2)?><strong></td>
 													<td id="td_hsn_<?php echo $em['id']?>"><?php echo date('Y')?></td>
 													</tr>

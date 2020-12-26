@@ -60,14 +60,28 @@ class Invoice_Model extends CI_Model {
     //where year(created_at) = '2020' group by month(created_at) order by id desc
 
 public function getMonthlyData($start,$end){
-$this->db->select('*,month(created_at) as mnth ,sum(total) as mt')
+$this->db->select('*,month(date) as mnth ,sum(total) as mt')
       ->from($this->table)
-      ->where(array('created_at >= ' => $start, 'created_at <= ' => $end))
-      ->group_by('month(created_at)')
+      ->where(array('date >= ' => $start, 'date <= ' => $end))
+      ->group_by('month(date)')
       ->order_by('id','desc');
 
         $query = $this->db->get();
 
+    return ($query->result_array()); 
+
+
+}
+
+
+public function getInvoiceOfMonth($month=0){
+$this->db->select('*')
+      ->from($this->table)
+      ->where(array('month(date)' => $month ))
+      ->order_by('id','desc');
+
+        $query = $this->db->get();
+        //_print_r($query->result_array());exit();
     return ($query->result_array()); 
 
 
@@ -150,7 +164,8 @@ $this->db->select('*,month(created_at) as mnth ,sum(total) as mt')
 
   public function getAllInvoicesOfCustomer($cust_id=0){
 
-    $q = "SELECT c.id,i.*,i.id as iid,i.date as idate,c.name,c.gst_no FROM `invoice` as i left join customer as c on c.id=i.`customer_id` where total is not null and c.id =".$cust_id;
+    $q = "SELECT c.id,i.*,i.id as iid,i.date as idate,c.name,c.gst_no FROM `invoice` as i 
+          left join customer as c on c.id=i.`customer_id` where total is not null and c.id =".$cust_id;
 
     $date1 = financial_yr_start();
     $date2 = date('Y-m-d');
@@ -165,10 +180,21 @@ $this->db->select('*,month(created_at) as mnth ,sum(total) as mt')
   
 
 
-  public function getAllInvoices(){
+  public function getAllInvoices($month=0){
 
+    $q = "SELECT *,count(ii.product_id)as nop,
+   customer.name as cname ,sum(price*qty*((100-discount)/100)*gst/100) as gst_value,invoice.id as inv_id 
+   FROM `invoice` left join customer on customer.id = invoice.customer_id left join invoice_items as ii on 
+   ii.invoice_id = invoice.id left join products AS p on p.id=ii.product_id WHERE invoice.date >= '2020-04-01' ";  
 
-       $data = $this->db->query("SELECT *,count(ii.product_id)as nop, customer.name as cname ,sum(price*qty*((100-discount)/100)*gst/100) as gst_value,invoice.id as inv_id FROM `invoice` left join customer on customer.id = invoice.customer_id left join invoice_items as ii on ii.invoice_id = invoice.id left join products AS p on p.id=ii.product_id WHERE invoice.date >= '2020-04-01'  group by invoice.id order by invoice.invoice_no DESC");
+   if($month>0){
+
+    $q.= " and month(invoice.date) = ".$month;
+   }
+   
+   $q.= " group by invoice.id order by invoice.invoice_no DESC";
+
+  $data = $this->db->query($q);
 
 
    /*SELECT sum(p.rate) as rate,p.gst as gst FROM `invoice` as i left join invoice_items as

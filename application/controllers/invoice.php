@@ -130,11 +130,20 @@ class Invoice extends CI_Controller {
 
 		//$month_wise_data = $this->General_Model->getDataByCond('invoice',array('created_at >=' => $date, 'created_at =<' => $end_date));
 
-		$data['mdata'] = $this->Invoice_Model->getMonthlyData($date,$end_date);
-		//_print_r($data['mdata']);exit();
-		$data['monthArr'] = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+		if($month>0){
+			
+			$data['prod_data'] = $this->Invoice_Model->getAllInvoices($month);
+			_getAdminLoadView('invoice_list',$data);
+			
+		}else{
+			$data['mdata'] = $this->Invoice_Model->getMonthlyData($date,$end_date);	
+			$data['monthArr'] = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 		_getAdminLoadView('monthly_sales',$data);
 
+		}
+		
+		//_print_r($data['mdata']);exit();
+		
 		
 
 		
