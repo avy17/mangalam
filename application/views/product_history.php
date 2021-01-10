@@ -38,7 +38,7 @@
 														<th>Rate</th>
 														<th>Date time</th>
 														<th>Invoice (If any)</th>
-														<th>Customer</th>
+														<th>Customer <em>(Click on the name to sort)</em></th>
 													</tr>
 												</thead>
 
@@ -56,8 +56,12 @@
 														<td><?php echo $em['pname']?></td>
 														<td><?php echo number_format($em['hrate'],2)?></td>
 														<td><?php echo date_converter($em['time'])?></td>
-														<td><?php echo $em['invoice_no']?></td>
-														<td><?php echo $em['cname']?></td>
+														<td><a href="<?php echo base_url('invoice/view_invoice/').$em['invoice_id']; ?>"><?php echo $em['invoice_no']?></a></td>
+														
+														<td><a href="<?php echo base_url('products/history/').$em['product_id'].'/'.$em['customer_id']; ?>"><?php echo $em['cname']?></a></td>
+														
+
+
 
 														
 													</tr>

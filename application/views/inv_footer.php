@@ -31,14 +31,18 @@
                                                                 </label>
                                                         </td>
 
+                                                        <?php  $cgst = number_format((((($em['rate'])*$em['gst'])/100)/2),2);  ?>
+
                                                         <td style="text-align: center;"><strong>@<?php echo $em['gst'];  ?>%</strong></td>
                                                         <td class="right"><?php echo number_format($em['rate'],2);  ?> </td>
                                                         <td class="middle">@<?php echo  ($em['gst']/2);  ?>%</td>
-                                                        <td class="middle"><?php echo  bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2);  ?> </td>
+                                                        <td class="middle"><?php echo  $cgst;  ?> </td>
+                                                       
+                                                        <!--<td class="middle"><?php echo  bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2);  ?> </td>  -->
                                                        <td class="middle">@<?php echo  ($em['gst']/2);  ?>%</td>
-                                                        <td class="right"><?php echo bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2);  ?> </td>
-                                                        <td style="text-align: right;"><strong><?php echo ((bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2))*2);  ?> </strong></td>
-<?php $sno+=  ((bcdiv((((($em['rate'])*$em['gst'])/100)/2),1,2))*2)     ?>
+                                                         <td class="middle"><?php echo  $cgst;  ?> </td>
+                                                        <td style="text-align: right;"><strong><?php echo ($cgst*2);  ?> </strong></td>
+<?php $sno+=  ($cgst*2);     ?>
                                                     </tr>
 
                                        

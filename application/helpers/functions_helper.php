@@ -24,7 +24,17 @@ function date_converter($dt=null) {
 function financial_yr_start(){
 
   $yr = date('Y');
-  return $yr.'-04-01';
+
+  $today = date('Y-m-d');
+  $fin_start_date = $yr.'-04-01';
+  $first_day = $yr.'-01-01';
+
+  if(strtotime($today) <= strtotime($fin_start_date) && strtotime($today) >= strtotime($first_day) ){
+    $fin_start_date = ($yr-1).'-04-01';
+  }
+
+
+  return $fin_start_date;
 }
 
 function _print_r($array) {

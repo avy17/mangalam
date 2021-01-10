@@ -16,7 +16,7 @@ class Invoice_Model extends CI_Model {
   
   public function getInvoiceNo(){
 
-    $current_year = date('Y-04-01');
+    $current_year = financial_yr_start();
 
    $inv_no = $this->db->select_max('invoice_no')->where('date >= ',$current_year)->get($this->table)->row();
 
@@ -29,7 +29,7 @@ class Invoice_Model extends CI_Model {
 
   }
 
-  public function productRateHistory($pro_id){
+  public function productRateHistory($pro_id,$cust_id=0){
 
     //SELECT * FROM `product_rate_history`
 
@@ -44,6 +44,9 @@ class Invoice_Model extends CI_Model {
     $this->db->join('customer as c', 'i.customer_id = c.id','left');
     
     $this->db->where(array('products.id' => $pro_id));
+    if($cust_id>0){
+      $this->db->where(array('c.id' => $cust_id));
+    }
 
 
     $query = $this->db->get();

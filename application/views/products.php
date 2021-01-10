@@ -64,8 +64,8 @@
 														<td>
 															<div class="hidden-sm hidden-xs action-buttons">
 
-																<a class="" href="<?php echo base_url('products/history/').$em['id'] ?>" data-target="" > 
-																	<i class="ace-icon fa fa-search plus"></i>
+																<a class="" target="__blank" href="<?php echo base_url('products/history/').$em['id'] ?>" data-target="" > 
+																	<i class="ace-icon fa fa-bar-chart"></i>
 																</a>
 																
 																<a class="edit_pro" href="#edit-pro-modal" data-target="#edit-pro-modal" data-id ="<?php echo $em['id'].'#'.$em['name'].'#'.$em['rate'].'#'.$em['hsn'].'#'.$em['gst'].'#'.$em['unit']?>" data-toggle="modal"> 

@@ -218,7 +218,7 @@ class Products extends CI_Controller {
 	public function history($pro_id,$cust_id=null){
 
 		$this->load->model('Invoice_Model');
-		$data['pro_data'] = $pro_data = $this->Invoice_Model->productRateHistory($pro_id);
+		$data['pro_data'] = $pro_data = $this->Invoice_Model->productRateHistory($pro_id,$cust_id);
 
 		//_print_r($pro_data);exit();
 

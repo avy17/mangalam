@@ -38,6 +38,8 @@ class Invoice extends CI_Controller {
 		//$this->load->library('invoice');
 		//print_r($this->session->userdata('inv_no'));
 		//redirect('products');
+
+		//print_r(number_format(15.6664,2));exit();
 		$a_date = date('Y-m-d');
 		$last_day = date("t", strtotime($a_date));
 		
@@ -122,7 +124,7 @@ class Invoice extends CI_Controller {
 		$year = date('Y');
 		$a_date = date('Y-m-d');
 		$last_day = date("t", strtotime($a_date));
-		$date = $year.'-04-01';	
+		$date = financial_yr_start();	
 		$end_date = ($year+1).'-03-31';	
 
 		//SELECT *,month(created_at) as mnth ,sum(total) as mt FROM `invoice` 
@@ -609,7 +611,7 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 		$postData = $this->input->post();
 		$no = $postData['invoice_no'];
 
-		$inv_data = $this->General_Model->getDataByCond('invoice',['invoice_no' => $no,'date >= ' => date('Y-04-01')]);
+		$inv_data = $this->General_Model->getDataByCond('invoice',['invoice_no' => $no,'date >= ' => financial_yr_start()]);
 		//_print_r($inv_data);exit();
 		if(count($inv_data) >0){
 			$this->form_validation->set_message('_valid_invoice_number', 'Invoice #'.$no.' already created this year!');
