@@ -461,11 +461,12 @@ public function view_invoice($inv_id = null,$p=0,$version=1,$getTotal = false){
 
 	}
 
-	public function lock_invoice_item($flag=1,$id){
+	/* public function lock_invoice_item($flag=1,$id){
 
 	$this->General_Model->updateData('invoice',$id,array('locked' => $flag));
 	redirect('invoice/all_invoices');
 	}
+*/
 
 	public function all_invoices($call=false){
 
